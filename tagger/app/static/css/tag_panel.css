@@ -1,0 +1,10 @@
+@keyframes highlightframe {
+	0% {background-color: #999;}
+	50% {background-color: #EEE;}
+	100% {background-color: #999;}
+}
+
+.wbzz6-highlight {
+	/*box-shadow: 0 0 5px #FF0;*/
+	animation: highlightframe 1s infinite;
+}

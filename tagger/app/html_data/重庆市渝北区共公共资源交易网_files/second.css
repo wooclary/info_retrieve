@@ -1,0 +1,272 @@
+/**!
+ * 渝北公共资源-二级
+ * author: zhangzj;
+ */
+
+ .main {
+ 	padding-bottom: 0;
+ }
+
+ .con {
+ 	padding-bottom: 18px;
+ 	background-color: #fff;
+ }
+
+ .path {
+ 	height: 44px;
+ 	padding-left: 10px;
+ 	font-family: "Microsoft YaHei";
+ 	font-size: 13px;
+ 	line-height: 44px;
+ 	color: #333;
+ }
+
+ .path a {
+ 	color: #333;
+ }
+
+.path p {
+	float: left;
+}
+
+.path-icon {
+	float: left;
+	width: 16px;
+	height: 14px;
+	background: url(../images/path-icon.png) no-repeat;
+	margin-top: 15px;
+	margin-right: 4px;
+}
+
+.left-tree {
+	/*height: 663px;*/
+	border: 1px solid #dedede;
+	border-top: 2px solid #055fb7;
+}
+
+.tree-hd {
+	height: 32px;
+	font-family: "Microsoft YaHei";
+	font-size: 15px;
+	line-height: 32px;
+	color: #055fb7;
+	text-align: center;
+	border-bottom: 1px solid #dedede;
+	background: url(../images/tree-hd.jpg) top left repeat-x;
+}
+
+
+.tree-bd {
+	padding: 14px;
+}
+
+.tree-item {
+	width: 155px;
+	height: 28px;
+	border: 1px solid #dcdcdc;
+	background: url(../images/tree-arrow.png) 33px 11px no-repeat;
+	background-color: #f8f8f8;
+	padding-left: 55px;
+	font-family: "Microsoft YaHei";
+	font-size: 13px;
+	line-height: 28px;
+	color: #333;
+	margin-bottom: 11px;
+}
+
+.tree-item.cur {
+	width: 156px;
+	height: 30px;
+	background: url(../images/tree-arrow-cur.png) 34px 12px no-repeat;
+	background-color: #055fb7;
+	padding-left: 56px;
+	line-height: 30px;
+	border: 0;
+}
+
+.tree-item.cur a {
+	color: #fff;
+}
+
+.tree-item.cur:hover a {
+	color: #fff;
+}
+
+.tree-item a {
+	color: #333;
+}
+
+.tree-item:hover a {
+	color: #055fb7;
+}
+
+.list-item {
+    padding-left: 14px;
+    height: 24px;
+    font-family: "Microsoft YaHei";
+    font-size: 14px;
+    line-height: 24px;
+    vertical-align: top;
+    color: #333;
+    background: url(../images/point.jpg) 0 50% no-repeat;
+}
+
+.ellipsis {
+    float: left;
+    width: 85%;
+    color: #333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.list-date {
+    float: right;
+    color: #c4c4c4;
+}
+
+
+.r-con {
+	/*height: 644px;*/
+	padding: 10px 15px;
+	border: 1px solid #dedede;
+}
+
+.r-con-hd {
+	height: 32px;
+	border-bottom: 1px solid #dedede;
+}
+
+.r-con-hd span {
+	font-family: "Microsoft YaHei";
+	font-size: 15px;
+	line-height: 31px;
+	color: #055fb7;
+	display: inline-block;
+	padding-left: 25px;
+	padding-right: 8px;
+	height: 31px;
+	border-bottom: 2px solid #055fb7;
+	margin-bottom: -1px;
+	background: url(../images/r-con-bg.png) 0 8px no-repeat
+}
+
+.r-con-bd {
+	padding-top: 10px;
+}
+
+/* 分页 */
+.wb-page-items {
+  margin-top:15px;
+  margin-left: 45px;
+}
+
+.wb-page-li {
+    float: left;
+    margin-left: 4px;
+    font-size: 14px;
+    text-align: center;
+    font-family: "Microsoft YaHei";
+}
+
+.wb-page-li>a {
+    display: block;
+}
+
+.wb-page-li.ml6 {
+    margin-left: 6px;
+}
+
+.wb-page-li.ml20 {
+    margin-left: 20px;
+}
+
+.wb-page-item {
+    width: 34px;
+    height: 24px;
+    border: 1px solid #dfdfdf;
+    line-height: 24px;
+    color: #666;
+}
+.wb-page-item:hover{
+    border:1px solid #0030cc;
+}
+
+.wb-page-item.current{
+    width: 36px;
+    height:26px;
+    line-height: 26px;
+    border:0;
+    color: #0030cc;
+    font-weight: bold;
+}
+.wb-page-default {
+    width: 36px;
+    height: 26px;
+    line-height: 26px;
+    color: #666;
+}
+
+.wb-page-omit {
+    width: auto;
+    padding: 0 18px 0 18px;
+}
+
+.wb-page-family {
+    font-family: "SimSun";
+}
+
+.wb-page-fs12 {
+    font-size: 12px;
+}
+
+.wb-page-number {
+    width: auto;
+    padding: 0 6px 0 6px;
+    font-weight: bold;
+}
+
+.wb-page-to {
+    width: auto;
+}
+
+.wb-page-next {
+    width: 58px;
+}
+
+.wb-page-next:hover {
+    background-color: #999999;
+    color: #fff;
+    cursor: pointer;
+    border: 1px solid #999;
+}
+
+.wb-page-go {
+    width: 28px;
+}
+
+.wb-past-page {
+	margin-right: 16px;
+}
+.leftclass2{
+	 background-image:url(../images/left1.jpg);
+	  background-repeat:no-repeat; 
+	  background-position:center;	
+	  font-family: "Microsoft YaHei";
+	font-size: 13px;
+	line-height: 28px;
+	color: #333;
+	text-indent:60px;}
+.leftclass{
+	 background-image:url(../images/left2.jpg);
+	  background-repeat:no-repeat; 
+	  background-position:center;	
+	  font-family: "Microsoft YaHei";
+	font-size: 13px;
+	line-height: 28px;
+	color: #fff;
+	text-indent:60px;}
+
+
+
+

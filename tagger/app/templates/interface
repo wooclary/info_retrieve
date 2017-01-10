@@ -1,0 +1,48 @@
+{% extends "bootstrap/base.html" %}
+{% block styles %}
+    {{ super() }}
+    <link href="{{ url_for('static', filename='css/tag_interface.css') }}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Tagger
+                    </a>
+                </li>
+                {% for file_name in file_names %}
+                <li>
+                    <a class="item">{{ file_name }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <iframe id="insert-iframe" src="/panel" frameborder="0" scrolling="yes"></iframe>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+{% endblock %}
+
+    <!-- Menu Toggle Script -->
+{% block scripts %}
+    {{ super() }}
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $("a.item").click(function() {
+            {# e.changeState();#}
+            var current = $(this)
+            $("iframe").attr('src', "/panel?filename=" + current.text());
+        });
+    });
+    </script>
+{% endblock %}

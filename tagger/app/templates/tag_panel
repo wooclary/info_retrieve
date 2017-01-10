@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>tag panel</title>
+<meta charset="utf-8" />
+<style type="text/css">
+div {padding: 20px;margin: 10px;}
+</style>
+
+<!-- to use tag panel, include these three resources -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/tag_panel.css') }}">
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/tag_panel.jquery.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/tag_panel.js') }}"></script>
+
+</head>
+<body>
+{{ insert_html_body }}
+</body>
+</html>

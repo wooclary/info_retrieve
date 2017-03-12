@@ -1,5 +1,5 @@
 """
-Html Tag
+Html Tag 相关
 """
 
 
@@ -16,4 +16,42 @@ class HtmlTagMap(object):
     def get_num(self):
         return self._num
 
-tag_map = HtmlTagMap('./ir/all_valid_html_tag.txt')
+# 创建tag_map
+
+tag_map = HtmlTagMap('/Users/Shawn/Projects/info_retrieve/ir/all_valid_html_tag.txt')
+
+
+def parse_selector(selector_str):
+    """
+    将选择器字符串转换结构化数据
+    例如: 'div.tbox.ftbox' -> ['div', 'tbox', 'ftbox']
+    :param selector_str: 选择器字符串
+    :return: tag, classes
+    """
+    selectors = selector_str.split('.')
+    tag, classes = selectors[0], selectors[1:]
+    # 将class按字典顺序排序
+    classes.sort()
+    return tag, classes
+
+
+def get_selector(tag, classes):
+    """
+    根据tag和classes生成选择器字符串
+    例如: 'div', ['tbox', 'ftbox'] -> 'div.tbox.ftbox'
+    :param tag: 标签
+    :param classes: 类名
+    :return: 选择器字符串
+    """
+    cls_part = '.'.join(classes)
+    return tag + '.' + cls_part if cls_part else tag
+
+
+def normalize_selector_str(selector_str):
+    """
+    标准化选择器字符串，使类别按字典序排列
+    :param selector_str: 选择器字符串
+    :return: 标准化的选择器字符串
+    """
+    tag, classes = parse_selector(selector_str)
+    return get_selector(tag, classes)

@@ -8,3 +8,11 @@
 	/*box-shadow: 0 0 5px #FF0;*/
 	animation: highlightframe 1s infinite;
 }
+
+[data-mark='true'] {
+	background-color: yellowgreen;
+}
+
+[data-mark='false'] {
+	background-color: yellow;
+}

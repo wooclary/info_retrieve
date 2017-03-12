@@ -2,6 +2,8 @@
 打印摘要树
 """
 
+from ir.html_tag import normalize_selector_str, get_selector
+
 
 def depth_first_traverse(node, depth):
     """
@@ -23,24 +25,28 @@ def synopsis_tree_printer(root, show_vector=False):
     """
     for node, depth in depth_first_traverse(root, 0):
         indent = ' ' * 4 * depth
-        output = '{}{}/'.format(indent, node.name)
+        tag, classes = node.stats.tag_name, node.stats.classes
+        selector = get_selector(tag, classes)
+        output = '{}{}/'.format(indent, selector)
         if show_vector:
-            output += ' ' + str(node.stats.get_feature_vector())
+            output += ' ' + str(node.stats)
         print(output)
 
 
-def get_node_by_label_sequence(root, label_sequence):
+def get_node_by_selector_sequence(root, selector_sequence):
     """
-    根据标签序列从摘要树中获取对应的结点
+    根据选择器序列从摘要树中获取对应的结点
     :param root: 摘要树根结点
-    :param label_sequence: 标签序列
+    :param selector_sequence: [标签序列]
     :return: 对应的结点
     """
     nodes = [root]
     ret_node = root
-    for label in label_sequence:
+    for selector in selector_sequence:
+        normalize_selector = normalize_selector_str(selector)
         for node in nodes:
-            if node.stats.tag_name.lower() == label.lower():
+            node_selector = get_selector(node.stats.tag_name, node.stats.classes)
+            if node_selector.lower() == normalize_selector.lower():
                 nodes = node.children
                 ret_node = node
                 break

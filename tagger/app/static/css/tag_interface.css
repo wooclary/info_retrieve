@@ -115,3 +115,7 @@ iframe {
     width: 100%;
     border: none;
 }
+
+#current_label_sequence {
+    height: 20px;
+}

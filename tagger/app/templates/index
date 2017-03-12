@@ -1,0 +1,11 @@
+{% extends "base" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h3>Click "Tag!" to download the web page and tag it.</h3>
+        <h3>Click "Check" to check all of local web pages.</h3>
+    </div>
+    {{ wtf.quick_form(search_form) }}
+    {{ wtf.quick_form(check_form) }}
+{% endblock %}

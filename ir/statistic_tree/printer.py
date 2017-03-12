@@ -2,6 +2,8 @@
 打印统计树
 """
 
+from ir.html_tag import get_selector
+
 
 def depth_first_traverse(node, depth):
     yield node, depth
@@ -17,7 +19,8 @@ def stats_tree_printer(root, show_vector=False):
     """
     for node, depth in depth_first_traverse(root, 0):
         indent = ' ' * 4 * depth
-        output = '{}{}/'.format(indent, node.stats.tag_name)
+        tag, classes = node.stats.tag_name, node.stats.classes
+        output = '{}{}/'.format(indent, get_selector(tag, classes))
         if show_vector:
             output += ' ' + str(node.stats)
         print(output)

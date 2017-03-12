@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import os
-
 # 将上级目录加入python path中
 import sys
 sys.path.append(os.path.abspath('..'))

@@ -1,6 +1,7 @@
 """
 路径摘要结点
 """
+
 from ir.html_tag import tag_map
 
 
@@ -8,6 +9,8 @@ class SynopsisStats(object):
     def __init__(self):
         # 标签名
         self.tag_name = ''
+        # 类名
+        self.classes = []
         # 当前元素的平均字符数
         self.current_elem_char_num_avg = 0
         # 子树的平均字符总数

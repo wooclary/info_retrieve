@@ -10,7 +10,7 @@
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a href="#">
+                    <a href="/">
                         Tagger
                     </a>
                 </li>
@@ -25,6 +25,8 @@
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
+            <div id="current_label_sequence">current label sequence indicator</div>
+            <hr/>
             <iframe id="insert-iframe" src="/panel" frameborder="0" scrolling="yes"></iframe>
         </div>
         <!-- /#page-content-wrapper -->
@@ -36,13 +38,13 @@
     <!-- Menu Toggle Script -->
 {% block scripts %}
     {{ super() }}
-    <script type="text/javascript">
-    $(document).ready(function(){
-        $("a.item").click(function() {
-            {# e.changeState();#}
-            var current = $(this)
-            $("iframe").attr('src', "/panel?filename=" + current.text());
-        });
-    });
-    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts/interface.js') }}"></script>
+{#    <script type="text/javascript">#}
+{#    $(document).ready(function(){#}
+{#        $("a.item").click(function() {#}
+{#            var current = $(this)#}
+{#            $("iframe#insert-iframe").attr('src', "/panel?filename=" + current.text());#}
+{#        });#}
+{#    });#}
+{#    </script>#}
 {% endblock %}

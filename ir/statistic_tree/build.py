@@ -9,12 +9,14 @@ from bs4 import BeautifulSoup
 from ir.statistic_tree.node import StatTreeNode
 
 
-def get_parsed_soup(file_path, parser='html5lib', head_filter=False):
+def get_parsed_soup(file_path, parser='html5lib', head_filter=False,
+                    iframe_filter=False, script_filter=False):
     """
     输出经过bs4解析后的html文件
     :param file_path: 文件地址
     :param parser: 使用的解析器
     :param head_filter: 是否过滤掉head元素
+    :param iframe_filter: 是否过滤掉iframe元素
     """
 
     with open(file_path, 'rb') as f:
@@ -30,8 +32,17 @@ def get_parsed_soup(file_path, parser='html5lib', head_filter=False):
                                           errors='ignore')
         if head_filter:
             unicode_str = re.sub('<head>[\s\S]*</head>', '', unicode_str)
+        if iframe_filter:
+            unicode_str = re.sub('<iframe[\s\S]*?>[\s\S]*?</iframe>', '', unicode_str)
+        if script_filter:
+            unicode_str = re.sub('<script[\s\S]*?>[\s\S]*?</script>', '', unicode_str)
 
     soup = BeautifulSoup(unicode_str, parser)
+    return soup
+
+
+def get_parsed_soup_from_str(html_content, parser='html5lib', head_filter=False, iframe_filter=False):
+    soup = BeautifulSoup(html_content, parser)
     return soup
 
 
@@ -80,6 +91,10 @@ def traverse(stats_node):
     bs, stats = stats_node.ref, stats_node.stats
     # 元素名
     stats.tag_name = bs.name
+    # 类名
+    classes = bs.get('class')
+    if classes:
+        stats.classes = classes  # 若类名不为空，则记录
     # 只属于当前元素的文本的长度
     ele_text = blank_filter(bs.findAll(text=True,
                                        recursive=False))
@@ -128,6 +143,21 @@ def build(file_path, parser='html5lib'):
     # output_parsed_page(file_path, parser)
     # 读取文件内容
     soup = get_parsed_soup(file_path, parser)
+    # 定位到html根结点
+    html = soup.html
+    root_node = StatTreeNode(html)
+
+    root_node.stats.sibling_num = 1
+
+    _ = traverse(root_node)
+
+    return root_node
+
+
+def build_from_str(html, parser='html5lib'):
+    # output_parsed_page(file_path, parser)
+    # 读取文件内容
+    soup = get_parsed_soup_from_str(html, parser)
     # 定位到html根结点
     html = soup.html
     root_node = StatTreeNode(html)

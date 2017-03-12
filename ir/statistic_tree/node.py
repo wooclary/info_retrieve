@@ -7,6 +7,7 @@ class Stats(object):
     def __init__(self, tag_name='', char_num=0, char_sum=0,
                  root_dist=0, subtree_height=0, sibling_num=0):
         self.tag_name = tag_name  # html元素标签名
+        self.classes = []
         self.char_num = char_num  # 当前元素内的字符数
         self.char_sum = char_sum  # 当前元素的子树的字符数和
         self.root_dist = root_dist  # 从html根结点到该结点的距离

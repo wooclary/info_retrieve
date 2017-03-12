@@ -9,6 +9,7 @@ class Config:
     DATA_EXTRA = 'html_data/'
     DATA_EXT = '.htm'
     RESULT_FILE = './app/result/tag_result.txt'
+    SECRET_KEY = 'hard to guess string'
 
     @staticmethod
     def init_app(app):

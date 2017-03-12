@@ -9,11 +9,13 @@ import json
 class FileManager(object):
     def __init__(self, app=None):
         self._app = None
-        self._dir = './tagger/app/html_data/'
+        # self._dir = './tagger/app/html_data/'
+        self._dir = '/Users/Shawn/Projects/info_retrieve/tagger/app/html_data'
         self._ext = '.htm'
         self._file_list = []
         self._relative_dir = 'html_data/'
-        self._result = './tagger/app/result/tag_result.txt'
+        # self._result = './tagger/app/result/tag_result.txt'
+        self._result = '/Users/Shawn/Projects/info_retrieve/tagger/app/result/tag_result.txt'
         self._lock = threading.Lock()
         self._result_lock = threading.Lock()
         if app is not None:
@@ -47,8 +49,8 @@ class FileManager(object):
             self.get_file_list()
         return [os.path.splitext(f)[0] for f in self._file_list]
 
-    def get_file_path(self, filename, has_ext=False):
-        if not self._file_list:
+    def get_file_path(self, filename, has_ext=False, update=False):
+        if not self._file_list or update:
             self.get_file_list()
         if not has_ext:
             filename += self._ext
@@ -64,13 +66,13 @@ class FileManager(object):
             ret_path = os.path.join(self._relative_dir, path)
         return ret_path
 
-    def write_result(self, file, labels):
+    def write_result(self, file, labels, sel):
         self._result_lock.acquire()
         with open(self._result, 'r') as f:
             result = json.loads(f.read())
 
         with open(self._result, 'w') as f:
-            result[file] = labels
+            result[file] = {'label': labels, 'sel': sel}
             f.write(json.dumps(result))
         self._result_lock.release()
 

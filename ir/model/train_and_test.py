@@ -2,10 +2,11 @@
 训练与测试
 """
 import numpy as np
-from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 
+from ir.synopsis.printer import depth_first_traverse
 from ir.model.data_set import generate_data_set_for_loocv
+from ir.html_tag import get_selector
 
 
 def convert2array(data):
@@ -39,10 +40,10 @@ def train_model(train_data):
     """
     train_data = convert2array(train_data)
     # log_reg = LogisticRegression(class_weight='balanced')
-    log_reg = RandomForestClassifier(n_estimators=20)
+    rfc = RandomForestClassifier(n_estimators=20)
     # log_reg = LogisticRegression()
-    log_reg.fit(train_data[0::, 0:-1], train_data[0::, -1])
-    return log_reg
+    rfc.fit(train_data[0::, 0:-1], train_data[0::, -1])
+    return rfc
 
 
 def test_model(test_data, model):
@@ -77,6 +78,10 @@ def test_model(test_data, model):
     # 按打分最值分类
     max_index = get_max_value_index(output_p[0::, 1])
     max_acc = 1 if target_c[max_index] == 1 else 0
+    # node = get_node_by_index(max_index)
+    # print(node.stats.tag_name)
+    # print(node.stats.classes)
+    # print(str(node))
     return tp, fp, fn, tn, max_acc
 
 
@@ -104,3 +109,11 @@ def cross_validate():
     output = ("准确率：%f\n精确率：%f\n召回率：%f\n最大值方法准确率：%f" %
               (accuracy, precision, recall, max_accuracy))
     print(output)
+
+
+def get_node_by_index(root, index):
+    n = 0
+    for node, depth in depth_first_traverse(root, 0):
+        if n == index:
+            return node
+        n += 1

@@ -3,11 +3,10 @@
 """
 
 from ir.synopsis.printer import (depth_first_traverse,
-                                 get_node_by_label_sequence)
-from ir.statistic_tree.build import build as build_stats
-from ir.statistic_tree.printer import stats_tree_printer
+                                 get_node_by_selector_sequence)
+from ir.statistic_tree.build import (build as build_stats,
+                                     build_from_str as build_stats_from_str)
 from ir.synopsis.build import build as build_synopsis
-from ir.synopsis.printer import synopsis_tree_printer
 from tagger.app.util.file_manager import FileManager
 
 
@@ -26,9 +25,9 @@ def get_data_set_from_html(file_name):
     synopsis_root, level_index = build_synopsis(tree_root)
     # synopsis_tree_printer(synopsis_root, True)
     tag_result = fm.get_result()
-    target_node_labels = tag_result[file_name].split(' > ')
-    target_node = get_node_by_label_sequence(synopsis_root,
-                                             target_node_labels)
+    target_node_labels = tag_result[file_name].get('label').split(' > ')
+    target_node = get_node_by_selector_sequence(synopsis_root,
+                                                target_node_labels)
     data = []
     for node, _ in depth_first_traverse(synopsis_root, 0):
         feature = node.stats.get_feature_vector()
@@ -39,12 +38,29 @@ def get_data_set_from_html(file_name):
     return data
 
 
+def get_data_set_from_html_str(html):
+    """
+    从html字符串生成数据集
+    :param html: html字符串
+    :return: 数据集，路径摘要树根节点
+    """
+    tree_root = build_stats_from_str(html)
+    synopsis_root, level_index = build_synopsis(tree_root)
+    data = []
+    for node, _ in depth_first_traverse(synopsis_root, 0):
+        feature = node.stats.get_feature_vector()
+        data.append(feature)
+    return data, synopsis_root
+
+
 def generate_data_set_for_loocv():
     """
     为留一验证(loocv)生成数据集
     :return: (训练集, 测试集）
     """
-    file_list = fm.get_file_list(has_ext=False)
+    resulted_filename = fm.get_result().keys()
+    file_list = [f for f in fm.get_file_list(has_ext=False)
+                 if f in resulted_filename]
     for test_file in file_list:
         # 此处并不去掉列标号，便于验证
         test_data = get_data_set_from_html(test_file)
@@ -53,3 +69,17 @@ def generate_data_set_for_loocv():
         for train_file in remain:
             train_data += get_data_set_from_html(train_file)
         yield train_data, test_data
+
+
+def generate_data_set():
+    """
+    将现有的所有页面生成训练集
+    :return: 训练集数据
+    """
+    resulted_filename = fm.get_result().keys()
+    file_list = [f for f in fm.get_file_list(has_ext=False)
+                 if f in resulted_filename]
+    train_data = []
+    for train_file in file_list:
+        train_data += get_data_set_from_html(train_file)
+    return train_data

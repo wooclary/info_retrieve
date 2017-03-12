@@ -98,3 +98,4 @@ bin/
 result/
 .idea/
 .DS_Store
+*.pyc

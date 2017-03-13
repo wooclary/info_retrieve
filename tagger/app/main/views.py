@@ -1,3 +1,7 @@
+"""
+路由视图
+"""
+
 import os
 import requests
 from flask import (request, render_template, send_from_directory,

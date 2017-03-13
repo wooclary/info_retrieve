@@ -24,7 +24,3 @@ def stats_tree_printer(root, show_vector=False):
         if show_vector:
             output += ' ' + str(node.stats)
         print(output)
-
-
-if __name__ == '__main__':
-    pass

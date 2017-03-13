@@ -1,3 +1,7 @@
+"""
+生成结构化数据相关
+"""
+
 import lxml.html
 from pyquery import PyQuery as pq
 

@@ -2,6 +2,8 @@
 Html Tag 相关
 """
 
+import os
+
 
 class HtmlTagMap(object):
     def __init__(self, file):
@@ -17,8 +19,9 @@ class HtmlTagMap(object):
         return self._num
 
 # 创建tag_map
-
-tag_map = HtmlTagMap('/Users/Shawn/Projects/info_retrieve/ir/all_valid_html_tag.txt')
+path = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                    'all_valid_html_tag.txt')
+tag_map = HtmlTagMap(path)
 
 
 def parse_selector(selector_str):

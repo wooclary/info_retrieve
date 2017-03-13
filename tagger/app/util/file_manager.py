@@ -9,13 +9,12 @@ import json
 class FileManager(object):
     def __init__(self, app=None):
         self._app = None
-        # self._dir = './tagger/app/html_data/'
-        self._dir = '/Users/Shawn/Projects/info_retrieve/tagger/app/html_data'
+        script_path = os.path.dirname(os.path.realpath(__file__))
+        self._dir = os.path.join(script_path, '../html_data')
         self._ext = '.htm'
         self._file_list = []
         self._relative_dir = 'html_data/'
-        # self._result = './tagger/app/result/tag_result.txt'
-        self._result = '/Users/Shawn/Projects/info_retrieve/tagger/app/result/tag_result.txt'
+        self._result = os.path.join(script_path, '../result/tag_result.txt')
         self._lock = threading.Lock()
         self._result_lock = threading.Lock()
         if app is not None:

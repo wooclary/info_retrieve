@@ -99,5 +99,6 @@ test2.py
 print_test.py
 result/
 .idea/
+versions.cfg
 .DS_Store
 *.pyc

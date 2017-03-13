@@ -94,7 +94,9 @@ ENV/
 
 html_data/
 bin/
-*test*.py
+test.py
+test2.py
+print_test.py
 result/
 .idea/
 .DS_Store
